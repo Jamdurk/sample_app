@@ -21,6 +21,8 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 gem "rails-controller-testing"
+# Adds functionality for hashed passwords
+gem 'bcrypt' 
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
