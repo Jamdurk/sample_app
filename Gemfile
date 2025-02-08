@@ -52,6 +52,9 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 
+  gem 'byebug', '11.0.1', platforms: [:mri, :mingw, :x64_mingw]
+
+
 end
 
 group :development do
