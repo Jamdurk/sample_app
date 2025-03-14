@@ -77,7 +77,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "sample_app_production"
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp 
-  host = 'https://sample-ap-ebecab6d9a15.herokuapp.com/'
+  host = 'https://sample-ap-ebecab6d9a15.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
