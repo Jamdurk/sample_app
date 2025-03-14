@@ -78,7 +78,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp 
   host = 'https://sample-ap-ebecab6d9a15.herokuapp.com'
-  config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.default_url_options = {  host: 'sample-ap-ebecab6d9a15.herokuapp.com', protocol: 'https' }
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
     :port           => '587',
