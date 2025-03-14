@@ -72,7 +72,7 @@ test "password should have a minimum length" do
   assert_not @user.valid?
 end 
 
-test "authenticated? should retyrb false for a user with nil digest" do
-  assert_not @user.authenticated?('')
+test "authenticated? should retry false for a user with nil digest" do
+  assert_not @user.authenticated?(:remember, '')
 end 
 end 
