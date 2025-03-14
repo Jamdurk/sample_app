@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
-  default from: "james.savona@outlook.com"
-  
+  default from: "aguy230001@gmail.com"
+
   def account_activation(user)
     @user = user
     user.activation_token = User.new_token
