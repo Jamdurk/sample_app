@@ -81,18 +81,19 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.perform_caching = false
 
-# Set your development host
- # Set correct host for production
-host = ENV['APP_HOST'] || 'https://sample-ap-ebecab6d9a15.herokuapp.com/'
-config.action_mailer.default_url_options = { host: host, protocol: 'https' }
+   # Set your development host
+   host = 'localhost:3000'
+   config.action_mailer.default_url_options = { host: host, protocol: 'http' }
 
-
-# Mailgun-specific settings
-  config.action_mailer.mailgun_settings = {
-  api_key: ENV['MAILGUN_API_KEY'],
-  domain: ENV['MAILGUN_DOMAIN']
-}
-
+   config.action_mailer.smtp_settings = {
+    address: 'smtp.mailgun.org',
+    port: 587,
+    domain: 'sandbox0b8640af80394ecbac06e7e3b193dfeb.mailgun.org', # Your sandbox domain from the error
+    user_name: ENV['postmaster@sandbox0b8640af80394ecbac06e7e3b193dfeb.mailgun.org'],      # Should be something like 'postmaster@your-domain'
+    password: ENV['4eef701640cd6d2c0c8f3e109e652e4d-3d4b3a2a-92f46a56'],    # Your Mailgun API key
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.
   config.action_mailer.perform_caching = false
