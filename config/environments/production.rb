@@ -76,17 +76,21 @@ Rails.application.configure do
   # config.active_job.queue_adapter = :resque
   # config.active_job.queue_name_prefix = "sample_app_production"
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp 
-  host = 'https://sample-ap-ebecab6d9a15.herokuapp.com'
-  config.action_mailer.default_url_options = {  host: 'sample-ap-ebecab6d9a15.herokuapp.com', protocol: 'https' }
-  ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
-    :port           => '587',
-    :authentication => :plain,
-    :user_name      => ENV['SENDGRID_USERNAME'],
-    :password       => ENV['SENDGRID_PASSWORD'],
-    :domain         => 'heroku.com',
-    :enable_starttls_auto => true 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_caching = false
+
+   # Set your development host
+   host = 'localhost:3000'
+   config.action_mailer.default_url_options = { host: host, protocol: 'http' }
+
+   config.action_mailer.smtp_settings = {
+    address: 'smtp.mailgun.org',
+    port: 587,
+    domain: 'sandbox0b8640af80394ecbac06e7e3b193dfeb.mailgun.org', # Your sandbox domain from the error
+    user_name: ENV['postmaster@sandbox0b8640af80394ecbac06e7e3b193dfeb.mailgun.org'],      # Should be something like 'postmaster@your-domain'
+    password: ENV['4eef701640cd6d2c0c8f3e109e652e4d-3d4b3a2a-92f46a56'],    # Your Mailgun API key
+    authentication: :plain,
+    enable_starttls_auto: true
   }
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.

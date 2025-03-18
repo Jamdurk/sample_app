@@ -28,6 +28,8 @@ gem 'faker'
 
 gem 'kaminari'
 
+gem 'mailgun-ruby'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
@@ -57,6 +59,8 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem 'byebug', '11.0.1', platforms: [:mri, :mingw, :x64_mingw]
+
+  gem 'dotenv-rails', groups: [:development, :test]
 
 
 end

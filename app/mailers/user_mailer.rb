@@ -1,9 +1,8 @@
 class UserMailer < ApplicationMailer
-  default from: "aguy230001@gmail.com"
+  default from: "postmaster@sandbox0b8640af80394ecbac06e7e3b193dfeb.mailgun.org"
 
   def account_activation(user)
     @user = user
-    user.activation_token = User.new_token
     mail to: user.email, subject: "Account activation"
   end
 
