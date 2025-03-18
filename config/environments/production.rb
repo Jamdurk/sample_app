@@ -75,23 +75,22 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter = :resque
   # config.active_job.queue_name_prefix = "sample_app_production"
+
+   # Configure mailer for development
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :mailgun
   config.action_mailer.perform_caching = false
 
-   # Set your development host
-   host = 'localhost:3000'
-   config.action_mailer.default_url_options = { host: host, protocol: 'http' }
+# Set your development host
+  host = 'localhost:3000'
+  config.action_mailer.default_url_options = { host: host, protocol: 'http' }
 
-   config.action_mailer.smtp_settings = {
-    address: 'smtp.mailgun.org',
-    port: 587,
-    domain: 'sandbox0b8640af80394ecbac06e7e3b193dfeb.mailgun.org', # Your sandbox domain from the error
-    user_name: ENV['postmaster@sandbox0b8640af80394ecbac06e7e3b193dfeb.mailgun.org'],      # Should be something like 'postmaster@your-domain'
-    password: ENV['4eef701640cd6d2c0c8f3e109e652e4d-3d4b3a2a-92f46a56'],    # Your Mailgun API key
-    authentication: :plain,
-    enable_starttls_auto: true
-  }
+# Mailgun-specific settings
+  config.action_mailer.mailgun_settings = {
+  api_key: ENV['MAILGUN_API_KEY'],
+  domain: ENV['MAILGUN_DOMAIN']
+}
+
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.
   config.action_mailer.perform_caching = false
