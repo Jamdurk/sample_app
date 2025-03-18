@@ -82,8 +82,10 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
 # Set your development host
-  host = 'localhost:3000'
-  config.action_mailer.default_url_options = { host: host, protocol: 'http' }
+ # Set correct host for production
+host = ENV['APP_HOST'] || 'https://sample-ap-ebecab6d9a15.herokuapp.com/'
+config.action_mailer.default_url_options = { host: host, protocol: 'https' }
+
 
 # Mailgun-specific settings
   config.action_mailer.mailgun_settings = {
