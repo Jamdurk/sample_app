@@ -3,6 +3,12 @@ source "https://rubygems.org"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.1"
 # Added in this gem as per 5.1.2 in the PDF it is depracated and old, however should be fine as no plans for this project outside the pdf
+gem 'image_processing'
+
+gem 'mini_magick'
+
+gem 'active_storage_validations'
+
 gem 'bootstrap-sass', '3.4.1'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -87,4 +93,5 @@ end
 
 group :production do
   gem "pg" 
+  gem 'aws-sdk-s3', require: false
 end
