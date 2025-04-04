@@ -11,6 +11,15 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: {  minimum: 6  }, allow_nil:true
   has_many :microposts, dependent: :destroy
+  has_many :active_relationships,  class_name:  "Relationship",
+                                   foreign_key: "follower_id",
+                                   dependent:   :destroy
+  
+  has_many :passive_relationships, class_name:  "Relationship",
+                                   foreign_key: "followed_id",
+                                   dependent:   :destroy
+  has_many :following, through: :active_relationships,  source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
 
 # Returns the hash digest of the given string.
  def User.digest(string)
@@ -67,11 +76,29 @@ class User < ApplicationRecord
   def password_reset_expired?
     reset_sent_at < 2.hours.ago 
   end 
+
  # Defines a proto-feed
- # See "Following users" for the the full implementation
   def feed
-    Micropost.where("user_id = ?", id)
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE  follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids})
+                     OR user_id = :user_id", user_id: id)
   end
+
+ # Follows a user.
+ def follow(other_user)
+  following << other_user
+ end
+
+ # Unfollows a user
+ def unfollow(other_user)
+  following.delete(other_user)
+ end
+
+ # Returns true if the current user is following the other user.
+ def following?(other_user)
+  following.include?(other_user)
+ end
   
   private
 

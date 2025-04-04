@@ -17,6 +17,8 @@ test "layout links" do
   assert_select "a[href=?]", login_path
   assert_select "a[href=?]", logout_path, count: 0
   assert_select "a[href=?]", signup_path, count: 1
+  assert_no_match "following", response.body
+  assert_no_match "followers", response.body
   assert_select "a[href=?]", user_path(@user), count: 0
   get contact_path
   assert_select "title", full_title("Contact")
@@ -38,6 +40,8 @@ test "layout links" do
   assert_select "a[href=?]", logout_path
   assert_select "a[href=?]", edit_user_path(@user)
   assert_select "a[href=?]", user_path(@user)
+  assert_match @user.following.count.to_s, response.body
+  assert_match @user.followers.count.to_s, response.body
 end
 
 
